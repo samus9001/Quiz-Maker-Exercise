@@ -1,17 +1,35 @@
-﻿namespace QuizMaker
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
+
+namespace QuizMaker
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Questions questions = new Questions();
+            Questions qna = new Questions();
 
-            Console.WriteLine("Enter questions along with correct and incorrect answers for them to be used for the quiz!\n");
+            UIMethods.Question();
+            qna.Question = UIMethods.QuestionInput();
 
-            string questionAndAnswers = Console.ReadLine();
-            questions.Answer = questionAndAnswers;
+            UIMethods.Answers();
+            qna.Answers.AddRange(UIMethods.AnswersInput());
+            //qna.Answers.ForEach(Console.WriteLine); // prints the list
 
-            Console.WriteLine(questions.Answer);
+            UIMethods.CorrectAnswer();
+            qna.CorrectAnswer = UIMethods.CorrectAnswerInput();
+
+            List<Questions> questionList = new List<Questions>();
+            questionList.Add(qna);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
+
+            var path = @"C:\QuestionsList.xml";
+            using (FileStream file = File.Create(path))
+            {
+                serializer.Serialize(file, questionList);
+            }
+
         }
     }
 }

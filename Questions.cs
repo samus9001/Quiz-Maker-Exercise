@@ -5,7 +5,7 @@ namespace QuizMaker
     public class Questions
     {
         public string Question;
-        public string Answer;
+        public List<string> Answers = new List<string>();
         public string CorrectAnswer;
     }
 }
