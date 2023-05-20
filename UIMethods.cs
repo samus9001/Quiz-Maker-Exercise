@@ -17,7 +17,7 @@ namespace QuizMaker
         /// </summary>
         public static void Answers()
         {
-            Console.WriteLine("Enter the answers seperated by a comma for the question");
+            Console.WriteLine("\nEnter the answers seperated by a comma for the question");
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace QuizMaker
         /// </summary>
         public static void CorrectAnswer()
         {
-            Console.WriteLine("Enter the correct answer for the question");
+            Console.WriteLine("\nEnter the correct answer for the question");
         }
 
         /// <summary>
