@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics;
 
 namespace QuizMaker
 {
@@ -7,25 +7,29 @@ namespace QuizMaker
         /// <summary>
         /// sets the UI message for inputting the question
         /// </summary>
-        public static void Question()
+        /// <param name="counter"></param>
+        public static void Question(int counter)
         {
-            Console.WriteLine("Enter the question");
+            Console.WriteLine($"Input a question to be used for Q{counter} in the quiz. Press the (Enter) key to submit.");
+            Console.WriteLine("Press the Escape (Esc) key to quit\n");
         }
 
         /// <summary>
         /// sets the UI message for inputting the answers to the question
         /// </summary>
-        public static void Answers()
+        /// <param name="counter"></param>
+        public static void Answers(int counter)
         {
-            Console.WriteLine("\nEnter the answers seperated by a comma for the question");
+            Console.WriteLine($"\n\nInput the answers seperated by the (,) key to be used for Q{counter} in the quiz. Press the (Enter) key to submit.\n");
         }
 
         /// <summary>
         /// sets the UI message for inputting the correct answer to the question
         /// </summary>
-        public static void CorrectAnswer()
+        /// <param name="counter"></param>
+        public static void CorrectAnswer(int counter)
         {
-            Console.WriteLine("\nEnter the correct answer for the question");
+            Console.WriteLine($"\n\nInput the correct answer to be used for Q{counter} in the quiz. Press the (Enter) key to submit.\n");
         }
 
         /// <summary>
@@ -58,7 +62,13 @@ namespace QuizMaker
             string correctAnswerUserInput = Console.ReadLine();
             return correctAnswerUserInput;
         }
+
+        /// <summary>
+        /// clears the screen after the user has input the correct answer for a question
+        /// </summary>
+        public static void ClearScreen()
+        {
+            Console.Clear();
+        }
     }
-
-
 }

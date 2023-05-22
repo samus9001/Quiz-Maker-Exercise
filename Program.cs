@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace QuizMaker
 {
@@ -8,9 +6,8 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            Questions qna = new Questions();
+            int counter = 0; // used for UI prompt information
             XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
-
             var path = @"C:\QuestionsList.xml";
             List<Questions> qnaList = new List<Questions>();
 
@@ -19,21 +16,38 @@ namespace QuizMaker
                 qnaList = serializer.Deserialize(file) as List<Questions>;
             }
 
-            UIMethods.Question();
-            qna.Question = UIMethods.QuestionInput();
-
-            UIMethods.Answers();
-            qna.Answers.AddRange(UIMethods.AnswersInput());
-            //qna.Answers.ForEach(Console.WriteLine); // prints the list
-
-            UIMethods.CorrectAnswer();
-            qna.CorrectAnswer = UIMethods.CorrectAnswerInput();
-
-            qnaList.Add(qna);
-
-            using (FileStream file = File.Create(path))
+            while (true) // loops until the Escape key is pressed on the question input
             {
-                serializer.Serialize(file, qnaList);
+                counter++;
+
+                Questions qna = new Questions();
+
+                UIMethods.Question(counter);
+
+                ConsoleKeyInfo cki = Console.ReadKey(true);
+
+                if (cki.Key == ConsoleKey.Escape)
+                {
+                    return;
+                }
+
+                qna.Question = UIMethods.QuestionInput();
+
+                UIMethods.Answers(counter);
+                qna.Answers.AddRange(UIMethods.AnswersInput());
+                //qna.Answers.ForEach(Console.WriteLine); // prints the list
+
+                UIMethods.CorrectAnswer(counter);
+                qna.CorrectAnswer = UIMethods.CorrectAnswerInput();
+
+                UIMethods.ClearScreen();
+
+                qnaList.Add(qna);
+
+                using (FileStream file = File.Create(path))
+                {
+                    serializer.Serialize(file, qnaList);
+                }
             }
         }
     }

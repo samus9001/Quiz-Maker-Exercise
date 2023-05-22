@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace QuizMaker
+﻿namespace QuizMaker
 {
     public class Questions
     {
