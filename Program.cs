@@ -6,14 +6,17 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            int counter = 0; // used for UI prompt information
+            int counter = 0; // used for UI question information
             XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
             var path = @"C:\QuestionsList.xml";
             List<Questions> qnaList = new List<Questions>();
 
             using (FileStream file = File.OpenRead(path))
             {
-                qnaList = serializer.Deserialize(file) as List<Questions>;
+                if (File.Exists(path) && new FileInfo(path).Length > 0)
+                {
+                    qnaList = serializer.Deserialize(file) as List<Questions>;
+                }
             }
 
             while (true) // loops until the Escape key is pressed on the question input
@@ -33,14 +36,9 @@ namespace QuizMaker
 
                 qna.Question = UIMethods.QuestionInput();
 
-                UIMethods.Answers(counter);
-                qna.Answers.AddRange(UIMethods.AnswersInput());
-                //qna.Answers.ForEach(Console.WriteLine); // prints the list
+                LogicMethods.QuestionSplit(qna, counter);
 
-                UIMethods.CorrectAnswer(counter);
-                qna.CorrectAnswer = UIMethods.CorrectAnswerInput();
-
-                UIMethods.ClearScreen();
+                //UIMethods.ClearScreen();
 
                 qnaList.Add(qna);
 

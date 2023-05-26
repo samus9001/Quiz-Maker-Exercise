@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace QuizMaker
+﻿namespace QuizMaker
 {
     public class UIMethods
     {
@@ -10,26 +8,9 @@ namespace QuizMaker
         /// <param name="counter"></param>
         public static void Question(int counter)
         {
-            Console.WriteLine($"Input a question to be used for Q{counter} in the quiz. Press the (Enter) key to submit.");
-            Console.WriteLine("Press the Escape (Esc) key to quit\n");
-        }
-
-        /// <summary>
-        /// sets the UI message for inputting the answers to the question
-        /// </summary>
-        /// <param name="counter"></param>
-        public static void Answers(int counter)
-        {
-            Console.WriteLine($"\n\nInput the answers seperated by the (,) key to be used for Q{counter} in the quiz. Press the (Enter) key to submit.\n");
-        }
-
-        /// <summary>
-        /// sets the UI message for inputting the correct answer to the question
-        /// </summary>
-        /// <param name="counter"></param>
-        public static void CorrectAnswer(int counter)
-        {
-            Console.WriteLine($"\n\nInput the correct answer to be used for Q{counter} in the quiz. Press the (Enter) key to submit.\n");
+            Console.WriteLine($"Input a question along with the answers and correct answer to be used for Q{counter} in the quiz.\nPress the (|) key after each input. Press the (*) key after the correct answer.");
+            Console.WriteLine("Press the (Enter) key to submit the question.");
+            Console.WriteLine("Press the (Esc) key to quit.\n");
         }
 
         /// <summary>
@@ -42,25 +23,9 @@ namespace QuizMaker
             return questionUserInput;
         }
 
-        /// <summary>
-        /// stores the user input for the answers
-        /// </summary>
-        /// <returns></returns>
-        public static string[] AnswersInput()
+        public static void QuestionInvalid()
         {
-            string answersUserInput = Console.ReadLine();
-            string[] answersArray = answersUserInput.Split(',');
-            return answersArray;
-        }
-
-        /// <summary>
-        /// stores the user input for the correct answer
-        /// </summary>
-        /// <returns></returns>
-        public static string CorrectAnswerInput()
-        {
-            string correctAnswerUserInput = Console.ReadLine();
-            return correctAnswerUserInput;
+            Console.WriteLine("Invalid input format. Please try again following the listed format above.");
         }
 
         /// <summary>
