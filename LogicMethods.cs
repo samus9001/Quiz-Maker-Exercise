@@ -9,8 +9,9 @@ namespace QuizMaker
         /// </summary>
         /// <param name="qna"></param>
         /// <param name="counter"></param>
-        public static void QuestionSplit(Questions qna, int counter)
+        public static bool QuestionSplit(Questions qna, int counter)
         {
+            bool validInput = true;
             string[] parts = qna.Question.Split('|');
 
             if (parts.Length >= 3)
@@ -34,9 +35,10 @@ namespace QuizMaker
             }
             else
             {
-                UIMethods.QuestionInvalid();
-                counter--;
+                //counter--;
+                validInput = false;
             }
+            return validInput;
         }
     }
 }

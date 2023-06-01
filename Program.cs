@@ -19,26 +19,42 @@ namespace QuizMaker
                 }
             }
 
-            while (true) // loops until the Escape key is pressed on the question input
+            while (true) // loops until any key except 'Y' is pressed on the Mode prompt
             {
-                counter++;
+                UIMethods.ClearScreen();
+                UIMethods.Mode();
 
                 Questions qna = new Questions();
+                char userInput = UIMethods.Input();
+                bool validInput = true;
 
-                UIMethods.Question(counter);
+                counter++;
 
-                ConsoleKeyInfo cki = Console.ReadKey(true);
-
-                if (cki.Key == ConsoleKey.Escape)
+                if (userInput == 'Y')
+                {
+                    UIMethods.ClearScreen();
+                    UIMethods.Question(counter);
+                }
+                else if (userInput != 'Y')
                 {
                     return;
                 }
 
-                qna.Question = UIMethods.QuestionInput();
+                while (true) // loops until the validInput variable is true
+                {
+                    if (!validInput)
+                    {
+                        UIMethods.QuestionInvalid();
+                    }
 
-                LogicMethods.QuestionSplit(qna, counter);
+                    qna.Question = UIMethods.QuestionInput();
+                    validInput = LogicMethods.QuestionSplit(qna, counter);
 
-                //UIMethods.ClearScreen();
+                    if (validInput)
+                    {
+                        break;
+                    }
+                }
 
                 qnaList.Add(qna);
 
