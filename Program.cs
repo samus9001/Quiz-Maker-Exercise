@@ -6,7 +6,6 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            int counter = 0; // used for UI question information
             XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
             var path = @"C:\QuestionsList.xml";
             List<Questions> qnaList = new List<Questions>();
@@ -27,33 +26,77 @@ namespace QuizMaker
                 Questions qna = new Questions();
                 char userInput = UIMethods.Input();
                 bool validInput = true;
-
-                counter++;
+                int scoreCount = 0;
 
                 if (userInput == 'Y')
                 {
                     UIMethods.ClearScreen();
-                    UIMethods.Question(counter);
-                }
-                else if (userInput != 'Y')
-                {
-                    return;
-                }
+                    UIMethods.Question();
 
-                while (true) // loops until the validInput variable is true
-                {
-                    if (!validInput)
+                    while (true) // loops until the validInput variable is true
                     {
-                        UIMethods.QuestionInvalid();
+                        if (!validInput)
+                        {
+                            UIMethods.InvalidQuestion();
+                        }
+
+                        qna.Question = UIMethods.InputQuestion();
+                        validInput = LogicMethods.QuestionSplit(qna);
+
+                        if (validInput)
+                        {
+                            break;
+                        }
                     }
+                }
+                if (userInput == 'Q')
+                {
+                    UIMethods.ClearScreen();
 
-                    qna.Question = UIMethods.QuestionInput();
-                    validInput = LogicMethods.QuestionSplit(qna, counter);
-
-                    if (validInput)
+                    if (qnaList.Count > 0)
                     {
+                        // select a random question from the list
+                        Random random = new Random();
+                        int index = random.Next(0, qnaList.Count);
+                        Questions randomQuestion = qnaList[index];
+
+                        UIMethods.DisplayQuestion(randomQuestion);
+                        UIMethods.DisplayAnswers(randomQuestion);
+                        UIMethods.InputAnswer();
+
+                        if (UIMethods.InputAnswer() == randomQuestion.CorrectAnswer)  //TODO: this is never triggered as the input is a number
+                        {
+                            UIMethods.CorrectAnswer();
+                            scoreCount++;
+                        }
+                        else
+                        {
+                            UIMethods.IncorrectAnswer(randomQuestion);
+                        }
+
+                        // remove the answered question from the qnaList
+                        qnaList.RemoveAt(index);
+
+                        UIMethods.PressAnyKey();
+
+                        // Check if all questions have been answered
+                        if (qnaList.Count == 0)
+                        {
+                            UIMethods.DisplayScore(scoreCount);
+                            UIMethods.PressAnyKey();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No questions available. Please add questions before starting the quiz."); //TODO: replace this with an if statement that prevents quiz starting if qnaList.Count is 0
+                        UIMethods.PressAnyKey();
                         break;
                     }
+                }
+                if (userInput == 'N')
+                {
+                    return;
                 }
 
                 qnaList.Add(qna);

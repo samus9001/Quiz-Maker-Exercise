@@ -8,8 +8,7 @@ namespace QuizMaker
         /// Split the input string into question and answer parts
         /// </summary>
         /// <param name="qna"></param>
-        /// <param name="counter"></param>
-        public static bool QuestionSplit(Questions qna, int counter)
+        public static bool QuestionSplit(Questions qna)
         {
             bool validInput = true;
             string[] parts = qna.Question.Split('|');
@@ -26,6 +25,7 @@ namespace QuizMaker
                     if (answer.EndsWith("*"))
                     {
                         qna.CorrectAnswer = answer.Trim('*');
+                        qna.Answers.Add(answer.Trim('*'));
                     }
                     else
                     {
@@ -35,7 +35,6 @@ namespace QuizMaker
             }
             else
             {
-                //counter--;
                 validInput = false;
             }
             return validInput;
