@@ -6,6 +6,12 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
+            Questions qna = new Questions();
+            char userInput;
+            bool validInput = true;
+            string answer;
+            int scoreCount = 0;
+
             XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
             var path = @"C:\QuestionsList.xml";
             List<Questions> qnaList = new List<Questions>();
@@ -18,15 +24,12 @@ namespace QuizMaker
                 }
             }
 
-            while (true) // loops until any key except 'Y' is pressed on the Mode prompt
+            while (true) // loops until the 'N' key is pressed on the Mode prompt
             {
                 UIMethods.ClearScreen();
                 UIMethods.Mode();
 
-                Questions qna = new Questions();
-                char userInput = UIMethods.Input();
-                bool validInput = true;
-                int scoreCount = 0;
+                userInput = UIMethods.Input();
 
                 if (userInput == 'Y')
                 {
@@ -48,13 +51,21 @@ namespace QuizMaker
                             break;
                         }
                     }
-                }
-                if (userInput == 'Q')
-                {
-                    UIMethods.ClearScreen();
 
-                    if (qnaList.Count > 0)
+                    qnaList.Add(qna);
+
+                    using (FileStream file = File.Create(path))
                     {
+                        serializer.Serialize(file, qnaList);
+                    }
+                }
+
+                if (userInput == 'Q' && qnaList.Count > 0)
+                {
+                    while (qnaList.Count > 0)
+                    {
+                        UIMethods.ClearScreen();
+
                         // select a random question from the list
                         Random random = new Random();
                         int index = random.Next(0, qnaList.Count);
@@ -62,9 +73,9 @@ namespace QuizMaker
 
                         UIMethods.DisplayQuestion(randomQuestion);
                         UIMethods.DisplayAnswers(randomQuestion);
-                        UIMethods.InputAnswer();
+                        answer = UIMethods.InputAnswer();
 
-                        if (UIMethods.InputAnswer() == randomQuestion.CorrectAnswer)  //TODO: this is never triggered as the input is a number
+                        if (answer == randomQuestion.CorrectAnswer)
                         {
                             UIMethods.CorrectAnswer();
                             scoreCount++;
@@ -77,33 +88,27 @@ namespace QuizMaker
                         // remove the answered question from the qnaList
                         qnaList.RemoveAt(index);
 
-                        UIMethods.PressAnyKey();
+                        UIMethods.PressEnterKey();
 
                         // Check if all questions have been answered
                         if (qnaList.Count == 0)
                         {
+                            UIMethods.ClearScreen();
                             UIMethods.DisplayScore(scoreCount);
-                            UIMethods.PressAnyKey();
+                            UIMethods.PressEnterKey();
                             break;
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("No questions available. Please add questions before starting the quiz."); //TODO: replace this with an if statement that prevents quiz starting if qnaList.Count is 0
-                        UIMethods.PressAnyKey();
-                        break;
-                    }
                 }
+                else if (userInput == 'Q' && qnaList.Count == 0)
+                {
+                    UIMethods.NoQuestionsAvailable();
+                    UIMethods.PressEnterKey();
+                }
+
                 if (userInput == 'N')
                 {
                     return;
-                }
-
-                qnaList.Add(qna);
-
-                using (FileStream file = File.Create(path))
-                {
-                    serializer.Serialize(file, qnaList);
                 }
             }
         }

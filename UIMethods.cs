@@ -8,7 +8,8 @@
         /// </summary>
         public static void Mode()
         {
-            Console.WriteLine("Press the (Y) key to input a question.\n");
+            Console.WriteLine("Welcome to the Quiz Maker!\n");
+            Console.WriteLine("Press the (Y) key to input a question to be used in the quiz.\n");
             Console.WriteLine("Press the (Q) key to start the quiz.\n");
             Console.WriteLine("Press the (N) key to exit.\n");
         }
@@ -29,6 +30,7 @@
         public static void Question()
         {
             Console.WriteLine($"Input a question along with the answers and the correct answer.\n\nPress the (|) key after each input. Press the (*) key after the correct answer.\n");
+            Console.WriteLine("Example: What colour is the sky? | red | blue* | green\n");
             Console.WriteLine("Press the (Enter) key to submit the question.\n");
         }
 
@@ -72,8 +74,8 @@
         /// </summary>
         public static string InputAnswer()
         {
-            Console.WriteLine("\nInput your answer (number):");
-            string userAnswer = Console.ReadKey().ToString();
+            Console.WriteLine("\nInput your answer:");
+            string userAnswer = Console.ReadLine();
             return userAnswer;
         }
 
@@ -94,15 +96,15 @@
         /// <param name="randomQuestion"></param>
         public static void IncorrectAnswer(Questions randomQuestion)
         {
-            Console.WriteLine($"\nThat is incorrect! The correct answer is {randomQuestion.CorrectAnswer}");
+            Console.WriteLine($"\n\nThat is incorrect! The correct answer is {randomQuestion.CorrectAnswer}");
         }
 
         /// <summary>
         /// sets the UI message to prompt the user to input any key
         /// </summary>
-        public static void PressAnyKey()
+        public static void PressEnterKey()
         {
-            Console.WriteLine("\nPress any key to continue");
+            Console.WriteLine("\nPress the (Enter) key to continue");
             Console.ReadKey();
         }
 
@@ -114,7 +116,14 @@
         {
             Console.WriteLine("All questions have been answered.");
             Console.WriteLine($"Your final score is {scoreCount}!");
-            Console.WriteLine("You can add more questions to the quiz or play again on the menu.");
+        }
+
+        /// <summary>
+        /// sets the UI message to display that there are no questions available for the quiz
+        /// </summary>
+        public static void NoQuestionsAvailable()
+        {
+            Console.WriteLine("\nNo questions available to start the quiz. Input questions first.");
         }
 
         /// <summary>
