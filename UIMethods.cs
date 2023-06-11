@@ -8,6 +8,7 @@
         /// </summary>
         public static void DisplayMode()
         {
+            Console.Clear();
             Console.WriteLine("Welcome to the Quiz Maker!\n");
             Console.WriteLine("Press the (Y) key to input a question to be used in the quiz.\n");
             Console.WriteLine("Press the (Q) key to start the quiz.\n");
@@ -25,10 +26,11 @@
         }
 
         /// <summary>
-        /// sets the UI message for inputting the question
+        /// sets the UI message for inputting a question
         /// </summary>
-        public static void DisplayQuestion()
+        public static void DisplayQuestionInformation()
         {
+            Console.Clear();
             Console.WriteLine($"Input a question along with the answers and the correct answer.\n\nPress the (|) key after each input. Press the (*) key after the correct answer.\n");
             Console.WriteLine("Example: What colour is the sky? | red | blue* | green\n");
             Console.WriteLine("Press the (Enter) key to submit the question.\n");
@@ -55,6 +57,7 @@
         /// <param name="randomQuestion"></param>
         public static void DisplayQuestion(QuizInformation randomQuestion)
         {
+            Console.Clear();
             Console.WriteLine(randomQuestion.Question);
         }
 
@@ -114,6 +117,7 @@
         /// <param name="scoreCount"></param>
         public static void DisplayScore(int scoreCount)
         {
+            Console.Clear();
             Console.WriteLine("All questions have been answered.");
             Console.WriteLine($"Your final score is {scoreCount}!");
         }
@@ -124,14 +128,6 @@
         public static void DisplayNoQuestionsAvailable()
         {
             Console.WriteLine("\nNo questions available to start the quiz. Input questions first.");
-        }
-
-        /// <summary>
-        /// clears the screen after the user input
-        /// </summary>
-        public static void DisplayClearScreen()
-        {
-            Console.Clear();
         }
     }
 }

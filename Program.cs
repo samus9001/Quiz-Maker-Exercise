@@ -27,15 +27,13 @@ namespace QuizMaker
 
             while (true) // loops until the 'N' key is pressed on the Mode prompt
             {
-                UIMethods.DisplayClearScreen();
                 UIMethods.DisplayMode();
 
                 userInput = UIMethods.InputKey();
 
                 if (userInput == 'Y')
                 {
-                    UIMethods.DisplayClearScreen();
-                    UIMethods.DisplayQuestion();
+                    UIMethods.DisplayQuestionInformation();
 
                     while (true) // loops until the validInput variable is true
                     {
@@ -65,8 +63,6 @@ namespace QuizMaker
                 {
                     while (qnaList.Count > 0)
                     {
-                        UIMethods.DisplayClearScreen();
-
                         // select a random question from the list
                         int index = random.Next(0, qnaList.Count);
                         QuizInformation randomQuestion = qnaList[index];
@@ -93,7 +89,6 @@ namespace QuizMaker
                         // Check if all questions have been answered
                         if (qnaList.Count == 0)
                         {
-                            UIMethods.DisplayClearScreen();
                             UIMethods.DisplayScore(scoreCount);
                             UIMethods.InputPressEnterKey();
                             break;
