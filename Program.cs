@@ -4,18 +4,19 @@ namespace QuizMaker
 {
     internal class Program
     {
+        const string QuestionsFileName = "../data/QuestionsList.xml";
+
         static void Main(string[] args)
         {
             char userInput;
             Random random = new Random();
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
-            var path = @"C:\QuestionsList.xml";
             List<QuizInformation> qnaList = new List<QuizInformation>();
 
-            using (FileStream file = File.OpenRead(path))
+            using (FileStream file = File.OpenRead(QuestionsFileName))
             {
-                if (File.Exists(path) && new FileInfo(path).Length > 0)
+                if (File.Exists(QuestionsFileName) && new FileInfo(QuestionsFileName).Length > 0)
                 {
                     qnaList = serializer.Deserialize(file) as List<QuizInformation>;
                 }
