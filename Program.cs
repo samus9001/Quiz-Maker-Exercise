@@ -6,22 +6,22 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            Questions qna = new Questions();
+            QuizInformation qna = new QuizInformation();
             char userInput;
             bool validInput = true;
             string answer;
             Random random = new Random();
             int scoreCount = 0;
 
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
+            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
             var path = @"C:\QuestionsList.xml";
-            List<Questions> qnaList = new List<Questions>();
+            List<QuizInformation> qnaList = new List<QuizInformation>();
 
             using (FileStream file = File.OpenRead(path))
             {
                 if (File.Exists(path) && new FileInfo(path).Length > 0)
                 {
-                    qnaList = serializer.Deserialize(file) as List<Questions>;
+                    qnaList = serializer.Deserialize(file) as List<QuizInformation>;
                 }
             }
 
@@ -69,7 +69,7 @@ namespace QuizMaker
 
                         // select a random question from the list
                         int index = random.Next(0, qnaList.Count);
-                        Questions randomQuestion = qnaList[index];
+                        QuizInformation randomQuestion = qnaList[index];
 
                         UIMethods.DisplayQuestion(randomQuestion);
                         UIMethods.DisplayAnswers(randomQuestion);

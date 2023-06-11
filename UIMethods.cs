@@ -53,7 +53,7 @@
         /// sets the UI message to display the question to the user
         /// </summary>
         /// <param name="randomQuestion"></param>
-        public static void DisplayQuestion(Questions randomQuestion)
+        public static void DisplayQuestion(QuizInformation randomQuestion)
         {
             Console.WriteLine(randomQuestion.Question);
         }
@@ -61,7 +61,7 @@
         /// <summary>
         /// sets the UI message to display the available answers
         /// </summary>
-        public static void DisplayAnswers(Questions randomQuestion)
+        public static void DisplayAnswers(QuizInformation randomQuestion)
         {
             for (int i = 0; i < randomQuestion.Answers.Count; i++)
             {
@@ -94,7 +94,7 @@
         /// sets the UI message to display that the answer is incorrect
         /// </summary>
         /// <param name="randomQuestion"></param>
-        public static void IncorrectAnswer(Questions randomQuestion)
+        public static void IncorrectAnswer(QuizInformation randomQuestion)
         {
             Console.WriteLine($"\n\nThat is incorrect! The correct answer is {randomQuestion.CorrectAnswer}");
         }

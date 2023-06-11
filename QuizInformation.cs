@@ -1,6 +1,6 @@
 ﻿namespace QuizMaker
 {
-    public class Questions
+    public class QuizInformation
     {
         public string Question;
         public List<string> Answers = new List<string>();

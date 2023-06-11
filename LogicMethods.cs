@@ -8,7 +8,7 @@ namespace QuizMaker
         /// Split the input string into question and answer parts
         /// </summary>
         /// <param name="qna"></param>
-        public static bool QuestionSplit(Questions qna)
+        public static bool QuestionSplit(QuizInformation qna)
         {
             bool validInput = true;
             string[] parts = qna.Question.Split('|');
