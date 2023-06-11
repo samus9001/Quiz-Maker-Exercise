@@ -4,7 +4,7 @@ namespace QuizMaker
 {
     internal class Program
     {
-        const string QuestionsFileName = "../data/QuestionsList.xml";
+        const string QuestionsFileName = @"../QuestionsList.xml";
 
         static void Main(string[] args)
         {
@@ -37,62 +37,71 @@ namespace QuizMaker
 
                             UIMethods.DisplayQuestionInformation();
 
-                            while (!validInput) // loops until the validInput variable is true
+                            do
                             {
-                                UIMethods.DisplayInvalidQuestion();
-
                                 qna.Question = UIMethods.InputQuestion();
                                 validInput = LogicMethods.QuestionSplit(qna);
+
+                                if (!validInput)
+                                {
+                                    UIMethods.DisplayInvalidQuestion();
+                                }
                             }
+                            while (!validInput);
 
-                            qnaList.Add(qna);
-
-                            LogicMethods.Serializer(QuestionsFileName, serializer, qnaList);
-                        }
-
-                        if (userInput == 'Q' && qnaList.Count > 0)
-                        {
-                            while (qnaList.Count > 0)
+                            if (validInput)
                             {
-                                // select a random question from the list
-                                int index = random.Next(0, qnaList.Count);
-                                QuizInformation randomQuestion = qnaList[index];
-
-                                UIMethods.DisplayQuestion(randomQuestion);
-                                UIMethods.DisplayAnswers(randomQuestion);
-                                string answer = UIMethods.InputAnswer();
-                                int scoreCount = 0;
-
-                                if (answer == randomQuestion.CorrectAnswer)
-                                {
-                                    UIMethods.DisplayCorrectAnswer();
-                                    scoreCount++;
-                                }
-                                else
-                                {
-                                    UIMethods.DisplayIncorrectAnswer(randomQuestion);
-                                }
-
-                                // remove the answered question from the qnaList
-                                qnaList.RemoveAt(index);
-
-                                UIMethods.InputPressEnterKey();
-
-                                // Check if all questions have been answered
-                                if (qnaList.Count == 0)
-                                {
-                                    UIMethods.DisplayScore(scoreCount);
-                                    UIMethods.InputPressEnterKey();
-                                    break;
-                                }
+                                qnaList.Add(qna);
                             }
                         }
-                        else if (userInput == 'Q' && qnaList.Count == 0)
+
+                        LogicMethods.Serializer(QuestionsFileName, serializer, qnaList);
+
+                        break;
+                    }
+
+                    if (userInput == 'Q' && qnaList.Count > 0)
+                    {
+                        while (qnaList.Count > 0)
                         {
-                            UIMethods.DisplayNoQuestionsAvailable();
+                            // select a random question from the list
+                            int index = random.Next(0, qnaList.Count);
+                            QuizInformation randomQuestion = qnaList[index];
+
+                            UIMethods.DisplayQuestion(randomQuestion);
+                            UIMethods.DisplayAnswers(randomQuestion);
+                            string answer = UIMethods.InputAnswer();
+                            int scoreCount = 0;
+
+                            if (answer == randomQuestion.CorrectAnswer)
+                            {
+                                UIMethods.DisplayCorrectAnswer();
+                                scoreCount++;
+                            }
+                            else
+                            {
+                                UIMethods.DisplayIncorrectAnswer(randomQuestion);
+                            }
+
+                            // remove the answered question from the qnaList
+                            qnaList.RemoveAt(index);
+
                             UIMethods.InputPressEnterKey();
-                            break;
+
+                            // Check if all questions have been answered
+                            if (qnaList.Count == 0)
+                            {
+                                UIMethods.DisplayScore(scoreCount);
+                                UIMethods.InputPressEnterKey();
+                                break;
+                            }
                         }
+                    }
+                    else if (userInput == 'Q' && qnaList.Count == 0)
+                    {
+                        UIMethods.DisplayNoQuestionsAvailable();
+                        UIMethods.InputPressEnterKey();
+                        break;
                     }
                 }
             }

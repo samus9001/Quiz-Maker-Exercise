@@ -119,7 +119,7 @@
         {
             Console.Clear();
             Console.WriteLine("All questions have been answered.");
-            Console.WriteLine($"Your final score is {scoreCount}!");
+            Console.WriteLine($"\nYour final score is {scoreCount}!");
         }
 
         /// <summary>
