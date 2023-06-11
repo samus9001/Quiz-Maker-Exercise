@@ -21,21 +21,21 @@ namespace QuizMaker
                 }
             }
 
-            while (true) // loops until the 'N' key is pressed on the Mode prompt
+            UIMethods.DisplayMode();
+
+            userInput = UIMethods.InputKey();
+            bool validInput = true;
+
+            while (userInput != 'N') // loops until the 'N' key is pressed on the Mode prompt
             {
-                UIMethods.DisplayMode();
-
-                userInput = UIMethods.InputKey();
-
                 if (userInput == 'Y')
                 {
                     QuizInformation qna = new QuizInformation();
 
                     UIMethods.DisplayQuestionInformation();
 
-                    while (true) // loops until the validInput variable is true
+                    while (!validInput) // loops until the validInput variable is true
                     {
-                        bool validInput = true;
 
                         if (!validInput)
                         {
@@ -100,11 +100,6 @@ namespace QuizMaker
                 {
                     UIMethods.DisplayNoQuestionsAvailable();
                     UIMethods.InputPressEnterKey();
-                }
-
-                if (userInput == 'N')
-                {
-                    return;
                 }
             }
         }
