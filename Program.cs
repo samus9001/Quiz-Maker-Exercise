@@ -26,6 +26,11 @@ namespace QuizMaker
             userInput = UIMethods.InputKey();
             bool validInput = true;
 
+            if (userInput == 'N')
+            {
+                return;
+            }
+
             while (userInput != 'N') // loops until the 'N' key is pressed on the Mode prompt
             {
                 if (userInput == 'Y')
@@ -36,19 +41,10 @@ namespace QuizMaker
 
                     while (!validInput) // loops until the validInput variable is true
                     {
-
-                        if (!validInput)
-                        {
-                            UIMethods.DisplayInvalidQuestion();
-                        }
+                        UIMethods.DisplayInvalidQuestion();
 
                         qna.Question = UIMethods.InputQuestion();
                         validInput = LogicMethods.QuestionSplit(qna);
-
-                        if (validInput)
-                        {
-                            break;
-                        }
                     }
 
                     qnaList.Add(qna);
