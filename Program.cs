@@ -10,17 +10,10 @@ namespace QuizMaker
         {
             char userInput;
             Random random = new Random();
-
-            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
             List<QuizInformation> qnaList = new List<QuizInformation>();
+            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
 
-            using (FileStream file = File.OpenRead(QuestionsFileName))
-            {
-                if (File.Exists(QuestionsFileName) && new FileInfo(QuestionsFileName).Length > 0)
-                {
-                    qnaList = serializer.Deserialize(file) as List<QuizInformation>;
-                }
-            }
+            LogicMethods.Deserializer(QuestionsFileName, qnaList, serializer);
 
             UIMethods.DisplayMode();
 
@@ -50,10 +43,7 @@ namespace QuizMaker
 
                     qnaList.Add(qna);
 
-                    using (FileStream file = File.Create(path))
-                    {
-                        serializer.Serialize(file, qnaList);
-                    }
+                    LogicMethods.Serializer(QuestionsFileName, serializer, qnaList);
                 }
 
                 if (userInput == 'Q' && qnaList.Count > 0)
