@@ -10,6 +10,7 @@ namespace QuizMaker
             char userInput;
             bool validInput = true;
             string answer;
+            Random random = new Random();
             int scoreCount = 0;
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<Questions>));
@@ -67,7 +68,6 @@ namespace QuizMaker
                         UIMethods.ClearScreen();
 
                         // select a random question from the list
-                        Random random = new Random();
                         int index = random.Next(0, qnaList.Count);
                         Questions randomQuestion = qnaList[index];
 
