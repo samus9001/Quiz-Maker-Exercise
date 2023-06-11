@@ -27,21 +27,21 @@ namespace QuizMaker
 
             while (true) // loops until the 'N' key is pressed on the Mode prompt
             {
-                UIMethods.ClearScreen();
-                UIMethods.Mode();
+                UIMethods.DisplayClearScreen();
+                UIMethods.DisplayMode();
 
-                userInput = UIMethods.Input();
+                userInput = UIMethods.InputKey();
 
                 if (userInput == 'Y')
                 {
-                    UIMethods.ClearScreen();
-                    UIMethods.Question();
+                    UIMethods.DisplayClearScreen();
+                    UIMethods.DisplayQuestion();
 
                     while (true) // loops until the validInput variable is true
                     {
                         if (!validInput)
                         {
-                            UIMethods.InvalidQuestion();
+                            UIMethods.DisplayInvalidQuestion();
                         }
 
                         qna.Question = UIMethods.InputQuestion();
@@ -65,7 +65,7 @@ namespace QuizMaker
                 {
                     while (qnaList.Count > 0)
                     {
-                        UIMethods.ClearScreen();
+                        UIMethods.DisplayClearScreen();
 
                         // select a random question from the list
                         int index = random.Next(0, qnaList.Count);
@@ -77,33 +77,33 @@ namespace QuizMaker
 
                         if (answer == randomQuestion.CorrectAnswer)
                         {
-                            UIMethods.CorrectAnswer();
+                            UIMethods.DisplayCorrectAnswer();
                             scoreCount++;
                         }
                         else
                         {
-                            UIMethods.IncorrectAnswer(randomQuestion);
+                            UIMethods.DisplayIncorrectAnswer(randomQuestion);
                         }
 
                         // remove the answered question from the qnaList
                         qnaList.RemoveAt(index);
 
-                        UIMethods.PressEnterKey();
+                        UIMethods.InputPressEnterKey();
 
                         // Check if all questions have been answered
                         if (qnaList.Count == 0)
                         {
-                            UIMethods.ClearScreen();
+                            UIMethods.DisplayClearScreen();
                             UIMethods.DisplayScore(scoreCount);
-                            UIMethods.PressEnterKey();
+                            UIMethods.InputPressEnterKey();
                             break;
                         }
                     }
                 }
                 else if (userInput == 'Q' && qnaList.Count == 0)
                 {
-                    UIMethods.NoQuestionsAvailable();
-                    UIMethods.PressEnterKey();
+                    UIMethods.DisplayNoQuestionsAvailable();
+                    UIMethods.InputPressEnterKey();
                 }
 
                 if (userInput == 'N')

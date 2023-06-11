@@ -6,7 +6,7 @@
         /// <summary>
         /// sets the UI message for what the user would like to do
         /// </summary>
-        public static void Mode()
+        public static void DisplayMode()
         {
             Console.WriteLine("Welcome to the Quiz Maker!\n");
             Console.WriteLine("Press the (Y) key to input a question to be used in the quiz.\n");
@@ -18,7 +18,7 @@
         /// checks the input key
         /// </summary>
         /// <returns></returns>
-        public static char Input()
+        public static char InputKey()
         {
             char userInput = Char.ToUpper(Console.ReadKey().KeyChar);
             return userInput;
@@ -27,7 +27,7 @@
         /// <summary>
         /// sets the UI message for inputting the question
         /// </summary>
-        public static void Question()
+        public static void DisplayQuestion()
         {
             Console.WriteLine($"Input a question along with the answers and the correct answer.\n\nPress the (|) key after each input. Press the (*) key after the correct answer.\n");
             Console.WriteLine("Example: What colour is the sky? | red | blue* | green\n");
@@ -44,7 +44,7 @@
             return questionUserInput;
         }
 
-        public static void InvalidQuestion()
+        public static void DisplayInvalidQuestion()
         {
             Console.WriteLine("\nInvalid input format. Please try again.\n");
         }
@@ -85,7 +85,7 @@
         /// <param name="userAnswer"></param>
         /// <param name="randomQuestion"></param>
         /// <param name="scoreCount"></param>
-        public static void CorrectAnswer()
+        public static void DisplayCorrectAnswer()
         {
             Console.WriteLine("\nThat is the correct answer!");
         }
@@ -94,7 +94,7 @@
         /// sets the UI message to display that the answer is incorrect
         /// </summary>
         /// <param name="randomQuestion"></param>
-        public static void IncorrectAnswer(QuizInformation randomQuestion)
+        public static void DisplayIncorrectAnswer(QuizInformation randomQuestion)
         {
             Console.WriteLine($"\n\nThat is incorrect! The correct answer is {randomQuestion.CorrectAnswer}");
         }
@@ -102,7 +102,7 @@
         /// <summary>
         /// sets the UI message to prompt the user to input any key
         /// </summary>
-        public static void PressEnterKey()
+        public static void InputPressEnterKey()
         {
             Console.WriteLine("\nPress the (Enter) key to continue");
             Console.ReadKey();
@@ -121,7 +121,7 @@
         /// <summary>
         /// sets the UI message to display that there are no questions available for the quiz
         /// </summary>
-        public static void NoQuestionsAvailable()
+        public static void DisplayNoQuestionsAvailable()
         {
             Console.WriteLine("\nNo questions available to start the quiz. Input questions first.");
         }
@@ -129,7 +129,7 @@
         /// <summary>
         /// clears the screen after the user input
         /// </summary>
-        public static void ClearScreen()
+        public static void DisplayClearScreen()
         {
             Console.Clear();
         }
