@@ -6,12 +6,8 @@ namespace QuizMaker
     {
         static void Main(string[] args)
         {
-            QuizInformation qna = new QuizInformation();
             char userInput;
-            bool validInput = true;
-            string answer;
             Random random = new Random();
-            int scoreCount = 0;
 
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
             var path = @"C:\QuestionsList.xml";
@@ -33,10 +29,14 @@ namespace QuizMaker
 
                 if (userInput == 'Y')
                 {
+                    QuizInformation qna = new QuizInformation();
+
                     UIMethods.DisplayQuestionInformation();
 
                     while (true) // loops until the validInput variable is true
                     {
+                        bool validInput = true;
+
                         if (!validInput)
                         {
                             UIMethods.DisplayInvalidQuestion();
@@ -69,7 +69,8 @@ namespace QuizMaker
 
                         UIMethods.DisplayQuestion(randomQuestion);
                         UIMethods.DisplayAnswers(randomQuestion);
-                        answer = UIMethods.InputAnswer();
+                        string answer = UIMethods.InputAnswer();
+                        int scoreCount = 0;
 
                         if (answer == randomQuestion.CorrectAnswer)
                         {
