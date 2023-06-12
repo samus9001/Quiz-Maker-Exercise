@@ -25,8 +25,6 @@ namespace QuizMaker
 
                 if (userInput == 'N')
                 {
-                    UIMethods.DisplayExit();
-                    UIMethods.InputPressEnterKey();
                     exit = true;
                 }
                 else
@@ -107,6 +105,9 @@ namespace QuizMaker
                     }
                 }
             }
+
+            UIMethods.DisplayExit();
+            UIMethods.InputPressEnterKey();
         }
     }
 }
