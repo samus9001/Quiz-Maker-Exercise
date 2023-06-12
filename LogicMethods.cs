@@ -5,7 +5,7 @@ namespace QuizMaker
     public class LogicMethods
     {
         const string QuestionsFileName = @"../QuestionsList.xml";
-        private static XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
+        static XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
 
 
         /// <summary>
