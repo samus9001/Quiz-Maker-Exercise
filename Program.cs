@@ -13,7 +13,7 @@ namespace QuizMaker
             List<QuizInformation> qnaList = new List<QuizInformation>();
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
 
-            LogicMethods.Deserializer(QuestionsFileName, qnaList, serializer);
+            LogicMethods.Deserialize(QuestionsFileName, qnaList, serializer);
 
             bool exit = false;
             while (!exit)
@@ -40,7 +40,7 @@ namespace QuizMaker
                             do
                             {
                                 qna.Question = UIMethods.InputQuestion();
-                                validInput = LogicMethods.QuestionSplit(qna);
+                                validInput = LogicMethods.SplitQuestion(qna);
 
                                 if (!validInput)
                                 {
@@ -55,7 +55,7 @@ namespace QuizMaker
                             }
                         }
 
-                        LogicMethods.Serializer(QuestionsFileName, serializer, qnaList);
+                        LogicMethods.Serialize(QuestionsFileName, serializer, qnaList);
 
                         break;
                     }

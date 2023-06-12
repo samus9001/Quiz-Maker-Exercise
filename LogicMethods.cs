@@ -7,10 +7,12 @@ namespace QuizMaker
     public class LogicMethods
     {
         /// <summary>
-        /// Deserializes the stored XML file
+        /// deserializes the stored XML file
         /// </summary>
         /// <param name="QuestionsFileName"></param>
-        public static void Deserializer(string QuestionsFileName, List<QuizInformation> qnaList, XmlSerializer serializer)
+        /// <param name="qnaList"></param>
+        /// <param name="serializer"></param>
+        public static void Deserialize(string QuestionsFileName, List<QuizInformation> qnaList, XmlSerializer serializer)
         {
             if (File.Exists(QuestionsFileName) && new FileInfo(QuestionsFileName).Length > 0)
             {
@@ -22,12 +24,12 @@ namespace QuizMaker
         }
 
         /// <summary>
-        /// Serializers the qnaList data into an XML file, which is then stored
+        /// serializes the qnaList data into an XML file, which is then stored
         /// </summary>
         /// <param name="QuestionsFileName"></param>
-        /// <param name="serializer"></param>
+        /// <param name="serialize"></param>
         /// <param name="qnaList"></param>
-        public static void Serializer(string QuestionsFileName, XmlSerializer serializer, List<QuizInformation> qnaList)
+        public static void Serialize(string QuestionsFileName, XmlSerializer serializer, List<QuizInformation> qnaList)
         {
             using (FileStream file = File.Create(QuestionsFileName))
             {
@@ -36,10 +38,10 @@ namespace QuizMaker
         }
 
         /// <summary>
-        /// Split the input string into question and answer parts
+        /// splits the input string into question and answers that are stored in the QuizInformation class variables
         /// </summary>
         /// <param name="qna"></param>
-        public static bool QuestionSplit(QuizInformation qna)
+        public static bool SplitQuestion(QuizInformation qna)
         {
             bool validInput = true;
             string[] parts = qna.Question.Split('|');

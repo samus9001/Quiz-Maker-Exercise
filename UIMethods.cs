@@ -73,6 +73,7 @@
         /// <summary>
         /// sets the UI message to display the available answers
         /// </summary>
+        /// <param name="randomQuestion"></param>
         public static void DisplayAnswers(QuizInformation randomQuestion)
         {
             for (int i = 0; i < randomQuestion.Answers.Count; i++)
@@ -94,9 +95,6 @@
         /// <summary>
         /// sets the UI message to display that the answer is correct
         /// </summary>
-        /// <param name="userAnswer"></param>
-        /// <param name="randomQuestion"></param>
-        /// <param name="scoreCount"></param>
         public static void DisplayCorrectAnswer()
         {
             Console.WriteLine("\nThat is the correct answer!");
