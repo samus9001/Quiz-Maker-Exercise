@@ -58,6 +58,8 @@ namespace QuizMaker
                 // starts the quiz
                 if (userInput == 'Q' && qnaList.Count > 0)
                 {
+                    int scoreCount = 0;
+
                     while (qnaList.Count > 0)
                     {
                         // select a random question from the list
@@ -67,7 +69,6 @@ namespace QuizMaker
                         UIMethods.DisplayQuestion(randomQuestion);
                         UIMethods.DisplayAnswers(randomQuestion);
                         string answer = UIMethods.InputAnswer();
-                        int scoreCount = 0;
 
                         if (answer == randomQuestion.CorrectAnswer)
                         {
