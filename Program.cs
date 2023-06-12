@@ -35,9 +35,13 @@ namespace QuizMaker
                     do
                     {
                         qna.Question = UIMethods.InputQuestion();
-                        validInput = LogicMethods.SplitQuestion(qna);
+                        validInput = LogicMethods.SplitQuestion(qna.Question);
 
-                        if (!validInput)
+                        if (validInput)
+                        {
+                            qna = LogicMethods.StoreqnaInput(qna.Question);
+                        }
+                        else
                         {
                             UIMethods.DisplayInvalidQuestion();
                         }

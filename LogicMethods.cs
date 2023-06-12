@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Xml;
+using System.Xml.Serialization;
 
 namespace QuizMaker
 {
@@ -38,16 +39,50 @@ namespace QuizMaker
         }
 
         /// <summary>
-        /// splits the input string into question and answers that are stored in the QuizInformation class variables
+        /// splits the question and answer input string then checks if it is valid
         /// </summary>
-        /// <param name="qna"></param>
-        public static bool SplitQuestion(QuizInformation qna)
+        /// <param name="Question"></param>
+        /// <returns></returns>
+        public static bool SplitQuestion(string Question)
         {
-            bool validInput = true;
-            string[] parts = qna.Question.Split('|');
+            string[] parts = Question.Split('|');
+            if (parts.Length >= 3)
+            {
+                bool asterisk = false;
+
+                string question = parts[0].Trim();
+                if (!question.EndsWith("?"))
+                {
+                    return false;
+                }
+
+                for (int i = 1; i < parts.Length; i++)
+                {
+                    string answer = parts[i].Trim();
+                    if (answer.EndsWith("*"))
+                    {
+                        asterisk = true;
+                        break;
+                    }
+                }
+                return asterisk;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// stores the quetion and answer input string into the QuizInformation class variables
+        /// </summary>
+        /// <param name="Question"></param>
+        /// <returns></returns>
+        public static QuizInformation StoreqnaInput(string Question)
+        {
+            QuizInformation qna = null;
+            string[] parts = Question.Split('|');
 
             if (parts.Length >= 3)
             {
+                qna = new QuizInformation();
                 qna.Question = parts[0].Trim();
                 qna.Answers = new List<string>();
                 qna.CorrectAnswer = null;
@@ -66,11 +101,7 @@ namespace QuizMaker
                     }
                 }
             }
-            else
-            {
-                validInput = false;
-            }
-            return validInput;
+            return qna;
         }
     }
 }
