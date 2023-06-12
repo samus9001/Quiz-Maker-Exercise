@@ -4,8 +4,6 @@ namespace QuizMaker
 {
     internal class Program
     {
-        const string QuestionsFileName = @"../QuestionsList.xml";
-
         static void Main(string[] args)
         {
             char userInput;
@@ -13,7 +11,7 @@ namespace QuizMaker
             List<QuizInformation> qnaList = new List<QuizInformation>();
             XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
 
-            LogicMethods.Deserialize(QuestionsFileName, qnaList, serializer);
+            LogicMethods.Deserialize();
 
             bool exit = false;
 
@@ -54,7 +52,7 @@ namespace QuizMaker
                         qnaList.Add(qna);
                     }
 
-                    LogicMethods.Serialize(QuestionsFileName, serializer, qnaList);
+                    LogicMethods.Serialize(qnaList);
                 }
 
                 // starts the quiz

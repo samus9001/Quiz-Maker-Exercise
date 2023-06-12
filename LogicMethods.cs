@@ -1,19 +1,21 @@
-﻿using System.Diagnostics.Metrics;
-using System.IO;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace QuizMaker
 {
     public class LogicMethods
     {
+        const string QuestionsFileName = @"../QuestionsList.xml";
+        private static XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
+
+
         /// <summary>
         /// deserializes the stored XML file
         /// </summary>
-        /// <param name="QuestionsFileName"></param>
-        /// <param name="qnaList"></param>
-        /// <param name="serializer"></param>
-        public static void Deserialize(string QuestionsFileName, List<QuizInformation> qnaList, XmlSerializer serializer)
+        /// <returns></returns>
+        public static List<QuizInformation> Deserialize()
         {
+            List<QuizInformation> qnaList = new List<QuizInformation>();
+
             if (File.Exists(QuestionsFileName) && new FileInfo(QuestionsFileName).Length > 0)
             {
                 using (FileStream file = File.OpenRead(QuestionsFileName))
@@ -21,15 +23,14 @@ namespace QuizMaker
                     qnaList = serializer.Deserialize(file) as List<QuizInformation>;
                 }
             }
+            return qnaList;
         }
 
         /// <summary>
         /// serializes the qnaList data into an XML file, which is then stored
         /// </summary>
-        /// <param name="QuestionsFileName"></param>
-        /// <param name="serialize"></param>
         /// <param name="qnaList"></param>
-        public static void Serialize(string QuestionsFileName, XmlSerializer serializer, List<QuizInformation> qnaList)
+        public static void Serialize(List<QuizInformation> qnaList)
         {
             using (FileStream file = File.Create(QuestionsFileName))
             {
