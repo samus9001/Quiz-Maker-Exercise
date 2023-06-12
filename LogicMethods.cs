@@ -7,7 +7,6 @@ namespace QuizMaker
         const string QuestionsFileName = @"../QuestionsList.xml";
         static XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
 
-
         /// <summary>
         /// deserializes the stored XML file
         /// </summary>

@@ -9,9 +9,6 @@ namespace QuizMaker
             char userInput;
             Random random = new Random();
             List<QuizInformation> qnaList = new List<QuizInformation>();
-            XmlSerializer serializer = new XmlSerializer(typeof(List<QuizInformation>));
-
-            LogicMethods.Deserialize();
 
             bool exit = false;
 
@@ -59,6 +56,7 @@ namespace QuizMaker
                 if (userInput == 'Q' && qnaList.Count > 0)
                 {
                     int scoreCount = 0;
+                    LogicMethods.Deserialize();
 
                     while (qnaList.Count > 0)
                     {
