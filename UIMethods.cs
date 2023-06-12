@@ -26,6 +26,15 @@
         }
 
         /// <summary>
+        /// sets the UI messsage upon exiting the program
+        /// </summary>
+        public static void DisplayExit()
+        {
+            Console.Clear();
+            Console.WriteLine("Goodbye!");
+        }
+
+        /// <summary>
         /// sets the UI message for inputting a question
         /// </summary>
         public static void DisplayQuestionInformation()
