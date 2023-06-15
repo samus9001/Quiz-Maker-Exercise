@@ -18,14 +18,11 @@ namespace QuizMaker
 
                 userInput = UIMethods.InputKey();
 
-                //exits the program
-                if (userInput == 'N')
+                if (userInput == 'N') //exits the program
                 {
                     exit = true;
                 }
-
-                //input questions for the quiz
-                if (userInput == 'Y')
+                else if (userInput == 'Y') //input questions for the quiz
                 {
                     bool validInput;
                     QuizInformation qna;
@@ -52,52 +49,51 @@ namespace QuizMaker
 
                     LogicMethods.Serialize(qnaList);
                 }
-
-                // starts the quiz
-                if (userInput == 'Q' && qnaList.Count > 0)
+                else if (userInput == 'Q') // starts the quiz
                 {
-                    int scoreCount = 0;
-                    LogicMethods.Deserialize();
-
-                    while (qnaList.Count > 0)
+                    if (qnaList.Count > 0)
                     {
-                        // select a random question from the list
-                        int index = random.Next(0, qnaList.Count);
-                        QuizInformation randomQuestion = qnaList[index];
+                        int scoreCount = 0;
+                        LogicMethods.Deserialize();
 
-                        UIMethods.DisplayQuestion(randomQuestion);
-                        UIMethods.DisplayAnswers(randomQuestion);
-                        string answer = UIMethods.InputAnswer();
-
-                        if (answer == randomQuestion.CorrectAnswer)
+                        while (qnaList.Count > 0)
                         {
-                            UIMethods.DisplayCorrectAnswer();
-                            scoreCount++;
-                        }
-                        else
-                        {
-                            UIMethods.DisplayIncorrectAnswer(randomQuestion);
-                        }
+                            // select a random question from the list
+                            int index = random.Next(0, qnaList.Count);
+                            QuizInformation randomQuestion = qnaList[index];
 
-                        // remove the answered question from the qnaList
-                        qnaList.RemoveAt(index);
+                            UIMethods.DisplayQuestion(randomQuestion);
+                            UIMethods.DisplayAnswers(randomQuestion);
+                            string answer = UIMethods.InputAnswer();
 
-                        UIMethods.InputPressEnterKey();
+                            if (answer == randomQuestion.CorrectAnswer)
+                            {
+                                UIMethods.DisplayCorrectAnswer();
+                                scoreCount++;
+                            }
+                            else
+                            {
+                                UIMethods.DisplayIncorrectAnswer(randomQuestion);
+                            }
 
-                        // Check if all questions have been answered
-                        if (qnaList.Count == 0)
-                        {
-                            UIMethods.DisplayScore(scoreCount);
+                            qnaList.RemoveAt(index); // remove the answered question from the qnaList
+
                             UIMethods.InputPressEnterKey();
-                            break;
+
+                            if (qnaList.Count == 0) // check if all questions have been answered
+                            {
+                                UIMethods.DisplayScore(scoreCount);
+                                UIMethods.InputPressEnterKey();
+                            }
                         }
                     }
+                    else
+                    {
+                        UIMethods.DisplayNoQuestionsAvailable();
+                        UIMethods.InputPressEnterKey();
+                    }
                 }
-                else if (userInput == 'Q' && qnaList.Count == 0)
-                {
-                    UIMethods.DisplayNoQuestionsAvailable();
-                    UIMethods.InputPressEnterKey();
-                }
+
             }
 
             UIMethods.DisplayExit();
