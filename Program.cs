@@ -39,7 +39,7 @@ namespace QuizMaker
 
                         if (validInput)
                         {
-                            qna = LogicMethods.StoreqnaInput(qna.Question);
+                            qna = LogicMethods.StoreQNAInput(qna.Question);
                         }
                         else
                         {

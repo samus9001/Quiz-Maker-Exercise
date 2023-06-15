@@ -75,7 +75,7 @@ namespace QuizMaker
         /// </summary>
         /// <param name="Question"></param>
         /// <returns></returns>
-        public static QuizInformation StoreqnaInput(string Question)
+        public static QuizInformation StoreQNAInput(string Question)
         {
             QuizInformation qna = null;
             string[] parts = Question.Split('|');
