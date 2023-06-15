@@ -17,7 +17,6 @@ namespace QuizMaker
                 UIMethods.DisplayMode();
 
                 userInput = UIMethods.InputKey();
-                bool validInput;
 
                 //exits the program
                 if (userInput == 'N')
@@ -28,6 +27,7 @@ namespace QuizMaker
                 //input questions for the quiz
                 if (userInput == 'Y')
                 {
+                    bool validInput;
                     QuizInformation qna = new QuizInformation();
 
                     UIMethods.DisplayQuestionInformation();
