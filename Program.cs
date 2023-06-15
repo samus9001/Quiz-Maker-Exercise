@@ -28,30 +28,27 @@ namespace QuizMaker
                 if (userInput == 'Y')
                 {
                     bool validInput;
-                    QuizInformation qna = new QuizInformation();
+                    QuizInformation qna;
 
                     UIMethods.DisplayQuestionInformation();
 
                     do
                     {
-                        qna.Question = UIMethods.InputQuestion();
-                        validInput = LogicMethods.SplitQuestion(qna.Question);
+                        string inputQuestion = UIMethods.InputQuestion();
+                        validInput = LogicMethods.SplitQuestion(inputQuestion);
 
                         if (validInput)
                         {
-                            qna = LogicMethods.StoreQNAInput(qna.Question);
+                            qna = LogicMethods.StoreQNAInput(inputQuestion);
                         }
                         else
                         {
                             UIMethods.DisplayInvalidQuestion();
+                            continue;
                         }
-                    }
-                    while (!validInput);
-
-                    if (validInput)
-                    {
                         qnaList.Add(qna);
                     }
+                    while (!validInput);
 
                     LogicMethods.Serialize(qnaList);
                 }
