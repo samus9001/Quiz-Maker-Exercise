@@ -9,13 +9,11 @@ namespace QuizMaker
             char userInput;
             Random random = new Random();
             List<QuizInformation> qnaList = new List<QuizInformation>();
-
             bool exit = false;
 
             while (!exit)
             {
                 UIMethods.DisplayMode();
-
                 userInput = UIMethods.InputKey();
 
                 if (userInput == 'N') //exits the program
@@ -24,10 +22,8 @@ namespace QuizMaker
                 }
                 else if (userInput == 'Y') //input questions for the quiz
                 {
-                    bool validInput;
-                    QuizInformation qna;
-
                     UIMethods.DisplayQuestionInformation();
+                    bool validInput;
 
                     do
                     {
@@ -36,14 +32,13 @@ namespace QuizMaker
 
                         if (validInput)
                         {
-                            qna = LogicMethods.StoreQNAInput(inputQuestion);
+                            QuizInformation qna = LogicMethods.StoreQNAInput(inputQuestion);
+                            qnaList.Add(qna);
                         }
                         else
                         {
                             UIMethods.DisplayInvalidQuestion();
-                            continue;
                         }
-                        qnaList.Add(qna);
                     }
                     while (!validInput);
 
@@ -61,7 +56,6 @@ namespace QuizMaker
                             // select a random question from the list
                             int index = random.Next(0, qnaList.Count);
                             QuizInformation randomQuestion = qnaList[index];
-
                             UIMethods.DisplayQuestion(randomQuestion);
                             UIMethods.DisplayAnswers(randomQuestion);
                             string answer = UIMethods.InputAnswer();
@@ -77,7 +71,6 @@ namespace QuizMaker
                             }
 
                             qnaList.RemoveAt(index); // remove the answered question from the qnaList
-
                             UIMethods.InputPressEnterKey();
 
                             if (qnaList.Count == 0) // check if all questions have been answered

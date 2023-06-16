@@ -49,7 +49,6 @@ namespace QuizMaker
             if (parts.Length >= 3)
             {
                 bool asterisk = false;
-
                 string question = parts[0].Trim();
                 if (!question.EndsWith("?"))
                 {
