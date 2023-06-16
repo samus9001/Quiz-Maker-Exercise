@@ -32,7 +32,7 @@ namespace QuizMaker
 
                         if (validInput)
                         {
-                            QuizInformation qna = LogicMethods.StoreQNAInput(inputQuestion);
+                            QuizInformation qna = LogicMethods.BuildQuizInformationFromInput(inputQuestion);
                             qnaList.Add(qna);
                         }
                         else
